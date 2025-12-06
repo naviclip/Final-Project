@@ -59,7 +59,7 @@ class Game:
                 self.btn_restart_win.draw(self.screen)
             elif self.state == LOSE:
                 self.screen.blit(self.bg_lose, (0,0))
-                self.btn_restarr_lose.draw(self.screen)
+                self.btn_restart_lose.draw(self.screen)
 
             pygame.display.update()
 
