@@ -4,7 +4,7 @@
 Demo Video: <URL>
 
 ## GitHub Repository
-GitHub Repo: <URL>
+GitHub Repo: https://github.com/naviclip/Dungeons-and-Starvation
 
 ## Description
 For my project, I decided to make a small minigame to test my skills with pygame. The program is a timed game where the player starts off in a dark area where the ground gives away to a hole. Once the player falls down that hole, the real game begins and a health bar sits at the top left corner of the screen. The player’s task is to collect the food sources scattered throughout the small map and reach the goal before the health bar depletes itself completely. The game uses the left and right arrow keys for movement and the up arrow for jumping.
