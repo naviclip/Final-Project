@@ -150,7 +150,7 @@ class Game:
             p.vy = JUMP
         elif self.state == GAME:
             for pl in self.platforms:
-                if (p.x + p.width > pl.rect.x and p.x < pl.rect.x + pl.rect.width and
+                if (p.x + p.width > pl.rect.x and p.x < .rect.x + pl.rect.width and
                     abs(p.y + p.height - pl.rect.y) < 5 and p.vy >= 0):
                     p.vy = JUMP
             if on_ground:
@@ -270,12 +270,20 @@ class Button:
     def __init__(self, image, pos):
         self.image = image
         self.rect = image.get_rect(center=pos)
+    # draw button onto the screen
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)
+    # checks if the button was clicked
+    def is_clicked(self, pos):
+        return self.rect.collidepoint(pos)
 
 # drawing the platform onto the screen
 class Platform:
     def __init__(self, x, y, image):
         self.image = image
-        self.rect = image.get__rect(topleft=(x, y))
+        self.rect = image.get_rect(topleft=(x, y))
+    def draw(self, screen, camera):
+        screen.blit(self.image, (self.rect.x - camera, self.rect.y))
 
 # drawing the food onto the screen
 class Food:
@@ -283,6 +291,9 @@ class Food:
         self.image = image
         self.rect = image.get_rect(topleft=(x, y))
         self.collected = False
+    def draw(self, screen, camera):
+        if not self.collected:
+            screen.blit(self.image, (self.rect.x - camera, self.rect.y))
 
 class Player:
     def __init__(self, idle_img, left_imgs, right_imgs):
@@ -292,7 +303,7 @@ class Player:
 
         self.x = 200
         self.y = 200
-        self.vy = 
+        self.vy = 0
         self.sprite_index = 0
         self.anim_timer = 0
         self.sprite = idle_img
@@ -300,9 +311,24 @@ class Player:
         self.height = idle_img.get_height()
 
     # animates the player when moving
+    def animate(self, left, right, dt):
+        if not left and not right:
+            self.sprite = self.idle_img
+            self.sprite_index = 0
+            self.anim_timer = 0
+            return
+        images = self.left_imgs if left else self.right_imgs
+        self.anim_timer += dt
+        if self.anim_timer >= ANIM_SPEED:
+            self.sprite_index = (self.sprite_index + 1) % len(images)
+            self.anim_timer = 0
+        self.sprite = images[self.sprite_index]
+    # draws the player
+    def draw(self, screen, camera):
+        screen.blit(self.sprite, (self.x - camera, self.y))
 
 def main():
-    Game().run()
+    Game().main()
 
 if __name__ == "__main__":
     main()
