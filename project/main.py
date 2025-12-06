@@ -56,7 +56,7 @@ class Game:
                 self.draw_game()
             elif self.state == WIN:
                 self.screen.blit(self.bg_win, (0,0))
-                self.btn_restart_win.dra(self.screen)
+                self.btn_restart_win.draw(self.screen)
             elif self.state == LOSE:
                 self.screen.blit(self.bg_lose, (0,0))
                 self.btn_restarr_lose.draw(self.screen)
@@ -150,7 +150,7 @@ class Game:
             p.vy = JUMP
         elif self.state == GAME:
             for pl in self.platforms:
-                if (p.x + p.width > pl.rect.x and p.x < .rect.x + pl.rect.width and
+                if (p.x + p.width > pl.rect.x and p.x < pl.rect.x + pl.rect.width and
                     abs(p.y + p.height - pl.rect.y) < 5 and p.vy >= 0):
                     p.vy = JUMP
             if on_ground:
@@ -257,7 +257,7 @@ class Game:
 
         for i in range(self.hunger):
             self.screen.blit(self.food_img, (50 + i*35, 10))
-
+            
 # Please try to commit more often
 
 # helps to load images
