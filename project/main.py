@@ -92,10 +92,6 @@ class Game:
             for pl in self.platforms
         ]
 
-        # hunger
-        self.hunger = MAX_HUNGER_ICONS
-        self.hunger_timer = 0
-
     # get ground y positions
     def start_ground_y(self):
         return H - self.start_ground.get_height()
